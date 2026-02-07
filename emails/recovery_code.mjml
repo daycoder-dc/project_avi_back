@@ -1,0 +1,32 @@
+<mjml>
+  <mj-head>
+    <mj-attributes>
+      <mj-all font-family="Arial, Helvetica, sans-serif" color="#333333" />
+    </mj-attributes>
+    <mj-style>
+      .card {
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        padding: 30px;
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body background-color="#f3f4f6">
+    <mj-section padding="40px 0 20px 0">
+      <mj-column width="500px" css-class="card">
+        <mj-text align="center" font-size="24px" font-weight="bold">
+          Hola, {{ name }}
+        </mj-text>
+        <mj-text>Recibimos una solicitud para recuperar tu contraseña.</mj-text>
+        <mj-text>Tu código de verificación es: <strong>{{ code }}<strong></mj-text>
+        <mj-text>Este código es válido por 15 minutos.</mj-text>
+        <mj-divider border-color="#e5e7eb" />
+        <mj-text font-size="12px" color="#9ca3af" padding-top="20px">
+          Este mensaje de correo se le ha enviado de forma automática. Por favor, no
+          intente enviar correos a la dirección de este mensaje.
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
