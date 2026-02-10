@@ -1,9 +1,9 @@
-import { BadRequestException, Injectable } from "@nestjs/common";
-import { DataSource } from "typeorm";
 import { AVITotalUsersDto } from "./avi.dto";
+import { Injectable } from "@nestjs/common";
+import { DataSource } from "typeorm";
 
 @Injectable()
-export class AVIService {
+export class AviSeguimiento {
   constructor (
     private readonly dt: DataSource
   ) {}
@@ -145,5 +145,63 @@ export class AVIService {
 
     const dts = await this.dt.query<{total:string}[]>(sql);
     return { total: dts[0]?.total || 0 };
+  }
+
+  async get_periodos(value: string) {
+    const months = [
+      "Enero", "Febrero", "Marzo", "Abril",
+      "Mayo", "Junio", "Julio", "Agosto",
+      "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+
+    const dts = await this.dt.query<{periodo:string}[]>(`
+      select distinct
+        v.periodo
+      from visitas v
+      where v.tipo_visita = $1
+      order by v.periodo desc
+      limit 15;
+    `, [value]);
+
+    const data = dts.map(it => {
+      const year = it.periodo.substring(0, 4);
+      const month =  parseInt(it.periodo.substring(4));
+
+      return {
+        value: it.periodo,
+        label: `${months[month - 1]} de ${year}`
+      };
+    });
+
+    data.unshift({ value: "0", label: "Total proyecto" });
+
+    return data;
+  }
+
+  async get_metricas() {
+    return [
+      { value: "planificadas", label: "Planificadas" },
+      { value: "ejecutadas", label: "Ejecuadas" },
+      { value: "efectivas", label: "Efectivas"},
+      { value: "efectividad", label: "% Efectividad"}
+    ];
+  }
+
+  async get_funcionarios(value: string) {
+    const dts = await this.dt.query<{tecnico:string}[]>(`
+      select distinct
+        v.tecnico
+      from visitas v
+      where v.tipo_visita = $1 and v.tecnico != '';
+    `, [value]);
+
+    const data = dts.map(it => {
+      const value = it.tecnico.trim();
+      const label = it.tecnico.trim().toUpperCase();
+      return { value, label };
+    });
+
+    data.unshift({ value: "0", label: "Total Funcionario" });
+    return data;
   }
 }
