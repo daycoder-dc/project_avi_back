@@ -48,9 +48,10 @@ export class AVIService {
     return this.dt.query<object[]>(`
       select
         v.resultado, v.poliza, v.fecha_visita, c.latitud,
-        c.longitud, c.barrio, v.tecnico, c.circuito
+        c.longitud, c.barrio, v.tecnico, c.circuito,
+        v.ejecutado, v.periodo
       from visitas v
-      join clientes c on v.poliza = c.cuenta
+      left join clientes c on v.poliza = c.cuenta
       where v.tipo_visita = $1;
     `, [value]);
   }
