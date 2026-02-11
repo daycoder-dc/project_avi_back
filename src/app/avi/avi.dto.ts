@@ -1,6 +1,6 @@
 import { IsArray, IsNotEmpty, IsString } from "class-validator";
 
-export class AVITotalUsersDto {
+export class AviTotalUsersDto {
   @IsNotEmpty()
   @IsString()
   attr: string;
@@ -9,4 +9,19 @@ export class AVITotalUsersDto {
   @IsArray()
   @IsString({ each: true })
   values: string[];
+}
+
+export class AviSeguimientoDto {
+  @IsNotEmpty()
+  @IsString()
+  tipo_seguimiento: string;
+
+  @IsNotEmpty()
+  @IsString()
+  tipo_metrica: string;
+
+  @IsNotEmpty()
+  @IsArray()
+  @IsString({ each: true })
+  tipo_periodos: string[];
 }

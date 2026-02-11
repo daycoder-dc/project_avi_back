@@ -1,6 +1,7 @@
+import { AviSeguimiento } from "./avi-seguimiento";
 import { AVIController } from "./avi.controller";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { AVIService } from "./avi.service";
+import { AviUniverso } from "./avi-universo";
 import { Module } from "@nestjs/common";
 
 @Module({
@@ -11,7 +12,8 @@ import { Module } from "@nestjs/common";
     AVIController
   ],
   providers: [
-    AVIService
+    AviSeguimiento,
+    AviUniverso
   ]
 })
 export class AVIModule {}
