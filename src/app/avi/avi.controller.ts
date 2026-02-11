@@ -6,8 +6,12 @@ import {
   Get,
 } from "@nestjs/common";
 
+import {
+  AviSeguimientoDto,
+  AviTotalUsersDto
+} from "./avi.dto";
+
 import { AviSeguimiento } from "./avi-seguimiento";
-import { AVITotalUsersDto } from "./avi.dto";
 
 @Controller({ path:"avi", version: "1" })
 export class AVIController {
@@ -35,9 +39,9 @@ export class AVIController {
     return this.seguimiento.get_map(value);
   }
 
-  @Get("grafico/metricas")
-  async get_metrics_evolutions(@Query("value") value: string) {
-    return this.seguimiento.get_metrics_evolutions(value);
+  @Post("grafico/metricas")
+  async get_metrics_evolutions(@Body() data: AviSeguimientoDto) {
+    return this.seguimiento.get_metrics_evolutions(data);
   }
 
   @Get("grafico/distribucion")
@@ -56,7 +60,7 @@ export class AVIController {
   }
 
   @Post("total-users")
-  async get_total_users(@Body() data: AVITotalUsersDto) {
+  async get_total_users(@Body() data: AviTotalUsersDto) {
     return this.seguimiento.get_total_users(data);
   }
 
@@ -73,5 +77,10 @@ export class AVIController {
   @Get("funcionarios")
   async get_funcionarios(@Query("value") value: string) {
     return this.seguimiento.get_funcionarios(value);
+  }
+
+  @Get("dimensiones-geograficas")
+  async get_dimensiones_geograficas() {
+    return this.seguimiento.get_dimensiones_geograficas();
   }
 }
