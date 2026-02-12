@@ -12,75 +12,57 @@ import {
 } from "./avi.dto";
 
 import { AviSeguimiento } from "./avi-seguimiento";
+import { AviUniverso } from "./avi-universo";
 
 @Controller({ path:"avi", version: "1" })
 export class AVIController {
   constructor (
-    private readonly seguimiento: AviSeguimiento
+    private readonly seguimiento: AviSeguimiento,
+    private readonly universos: AviUniverso
   ) {}
 
-  @Get("planned")
-  async get_planned(@Query("value") value: string) {
-    return this.seguimiento.get_planned(value);
+  @Post("seguimiento/indicadores")
+  async get_indicadores(@Body() data: AviSeguimientoDto) {
+    return this.seguimiento.get_indicadores(data);
   }
 
-  @Get("executed")
-  async get_executed(@Query("value") value: string) {
-    return this.seguimiento.get_executed(value);
-  }
-
-  @Get("effective")
-  async get_effective(@Query("value") value: string) {
-    return this.seguimiento.get_effective(value);
-  }
-
-  @Get("grafico/mapa")
+  @Get("seguimiento/mapa")
   async get_map(@Query("value") value: string) {
     return this.seguimiento.get_map(value);
   }
 
-  @Post("grafico/metricas")
-  async get_metrics_evolutions(@Body() data: AviSeguimientoDto) {
-    return this.seguimiento.get_metrics_evolutions(data);
+  @Get("seguimiento/distribucion")
+  async get_distribucion(@Query("value") value: string) {
+    return this.seguimiento.get_distribucion(value);
   }
 
-  @Get("grafico/distribucion")
-  async get_distribution(@Query("value") value: string) {
-    return this.seguimiento.get_distribution(value);
-  }
-
-  @Get("attributes")
-  async get_attributes() {
-    return this.seguimiento.get_attributes();
-  }
-
-  @Get("attribute-values")
-  async get_attribute_values(@Query("value") value: string) {
-    return this.seguimiento.get_attribute_values(value);
-  }
-
-  @Post("total-users")
-  async get_total_users(@Body() data: AviTotalUsersDto) {
-    return this.seguimiento.get_total_users(data);
-  }
-
-  @Get("periodos")
+  @Get("seguimiento/periodos")
   async get_periodos(@Query("value") value: string) {
     return this.seguimiento.get_periodos(value);
   }
 
-  @Get("metricas")
+  @Get("seguimiento/metricas")
   async get_metricas() {
     return this.seguimiento.get_metricas();
   }
 
-  @Get("funcionarios")
-  async get_funcionarios(@Query("value") value: string) {
-    return this.seguimiento.get_funcionarios(value);
-  }
-
-  @Get("dimensiones-geograficas")
+  @Get("seguimiento/dimensiones-geograficas")
   async get_dimensiones_geograficas() {
     return this.seguimiento.get_dimensiones_geograficas();
+  }
+
+  @Get("universos/atributos")
+  async get_attributes() {
+    return this.universos.get_attributes();
+  }
+
+  @Get("universos/valores-atributos")
+  async get_attribute_values(@Query("value") value: string) {
+    return this.universos.get_attribute_values(value);
+  }
+
+  @Post("universos/total-usuarios")
+  async get_total_users(@Body() data: AviTotalUsersDto) {
+    return this.universos.get_total_users(data);
   }
 }
