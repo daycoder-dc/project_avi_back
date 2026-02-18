@@ -31,11 +31,6 @@ export class AVIController {
     return this.seguimiento.get_map(value);
   }
 
-  @Get("seguimiento/distribucion")
-  async get_distribucion(@Query("value") value: string) {
-    return this.seguimiento.get_distribucion(value);
-  }
-
   @Get("seguimiento/periodos")
   async get_periodos(@Query("value") value: string) {
     return this.seguimiento.get_periodos(value);
