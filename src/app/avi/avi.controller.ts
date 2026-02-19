@@ -6,12 +6,8 @@ import {
   Get,
 } from "@nestjs/common";
 
-import {
-  AviSeguimientoDto,
-  AviTotalUsersDto
-} from "./avi.dto";
-
 import { AviSeguimiento } from "./avi-seguimiento";
+import { AviTotalUsersDto } from "./avi.dto";
 import { AviUniverso } from "./avi-universo";
 
 @Controller({ path:"avi", version: "1" })
@@ -21,9 +17,9 @@ export class AVIController {
     private readonly universos: AviUniverso
   ) {}
 
-  @Post("seguimiento/indicadores")
-  async get_indicadores(@Body() data: AviSeguimientoDto) {
-    return this.seguimiento.get_indicadores(data);
+  @Get("seguimiento/indicadores")
+  async get_indicadores(@Query("indicador") indicador:string) {
+    return this.seguimiento.get_indicadores(indicador);
   }
 
   @Get("seguimiento/mapa")

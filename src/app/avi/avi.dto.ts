@@ -10,27 +10,3 @@ export class AviTotalUsersDto {
   @IsString({ each: true })
   values: string[];
 }
-
-export class AviSeguimientoDto {
-  @IsNotEmpty()
-  @IsString()
-  indicador: string;
-
-  @IsNotEmpty()
-  @IsArray()
-  @IsString({ each: true })
-  periodos: string[];
-
-  @IsNotEmpty()
-  @IsString()
-  metrica: string;
-
-  @IsNotEmpty()
-  @IsArray()
-  @IsString({ each: true })
-  funcionarios: string[];
-
-  @IsNotEmpty()
-  @IsString()
-  dimension: string;
-}
