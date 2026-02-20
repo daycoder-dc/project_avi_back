@@ -22,11 +22,6 @@ export class AVIController {
     return this.seguimiento.get_indicadores(indicador);
   }
 
-  @Get("seguimiento/mapa")
-  async get_map(@Query("value") value: string) {
-    return this.seguimiento.get_map(value);
-  }
-
   @Get("seguimiento/periodos")
   async get_periodos(@Query("value") value: string) {
     return this.seguimiento.get_periodos(value);
@@ -37,9 +32,9 @@ export class AVIController {
     return this.seguimiento.get_metricas();
   }
 
-  @Get("seguimiento/dimensiones-geograficas")
-  async get_dimensiones_geograficas() {
-    return this.seguimiento.get_dimensiones_geograficas();
+  @Get("seguimiento/dimensiones")
+  async get_dimensiones() {
+    return this.seguimiento.get_dimensiones();
   }
 
   @Get("universos/atributos")

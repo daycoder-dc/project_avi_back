@@ -47,7 +47,7 @@ export class AviSeguimiento {
     ];
   }
 
-  async get_dimensiones_geograficas() {
+  async get_dimensiones() {
     return [
       { value: "barrio", label: "Barrio" },
       { value: "circuito", label: "Circuito" },
@@ -61,17 +61,5 @@ export class AviSeguimiento {
       left join clientes c on v.poliza = c.cuenta
       where v.tipo_visita = $1
     `, [indicador]);
-  }
-
-  async get_map(value: string) {
-    return this.dt.query<object[]>(`
-      select
-        v.resultado, v.poliza, v.fecha_visita, c.latitud,
-        c.longitud, c.barrio, v.tecnico, c.circuito,
-        v.ejecutado, v.periodo
-      from visitas v
-      left join clientes c on v.poliza = c.cuenta
-      where v.tipo_visita = $1;
-    `, [value]);
   }
 }
