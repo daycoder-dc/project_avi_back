@@ -37,18 +37,18 @@ export class AVIController {
     return this.seguimiento.get_dimensiones();
   }
 
+  @Get("universos")
+  async get_universos() {
+    return this.universos.get_universos();
+  }
+
   @Get("universos/atributos")
-  async get_attributes() {
-    return this.universos.get_attributes();
+  async get_atributos() {
+    return this.universos.get_atritubutos();
   }
 
-  @Get("universos/valores-atributos")
-  async get_attribute_values(@Query("value") value: string) {
-    return this.universos.get_attribute_values(value);
-  }
-
-  @Post("universos/total-usuarios")
-  async get_total_users(@Body() data: AviTotalUsersDto) {
-    return this.universos.get_total_users(data);
+  @Get("universos/visitas")
+  async get_visitas() {
+    return this.universos.get_visitas();
   }
 }
