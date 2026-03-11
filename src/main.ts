@@ -16,20 +16,22 @@ async function bootstrap() {
   });
 
   app.set("trusts proxy", 1);
+  app.setGlobalPrefix("api");
 
   app.useLogger(app.get(Logger));
   app.useGlobalInterceptors(new LoggerErrorInterceptor());
-  app.useBodyParser("urlencoded", { extended: true });
-  app.enableVersioning({ type: VersioningType.URI });
   app.useGlobalFilters(new HttpExceptionFilter());
+
+  app.enableVersioning({ type: VersioningType.URI });
+
+  app.useBodyParser("urlencoded", { extended: true });
   app.useBodyParser("json", { limit: "50mb" });
-  app.disable("x-powered-by");
 
   app.use(cookieParser(COOKIE_SECRET));
 
   app.enableCors({
     origin: ORIGINS,
-    methods: ["GET","POST","PUT", "PATCH","DELETE"],
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
     credentials: true
   });
