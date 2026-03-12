@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     labels:
       - traefik.enable=true
-      - traefik.http.routers.avi_back.rule=Host(`${TRAEFIK_HOST`})
+      - traefik.http.routers.avi_back.rule=Host(`${DNS}}`)
       - traefik.http.routers.avi_back.entrypoints=websecure
       - traefik.http.routers.avi_back.tls.certresolver=letsencrypt
       - traefik.http.services.avi_back.loadbalancer.server.port=3000
