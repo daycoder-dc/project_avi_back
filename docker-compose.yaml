@@ -4,11 +4,11 @@ services:
     container_name: avi_back_app
     restart: unless-stopped
     labels:
-      - traefik.enable=true
-      - traefik.http.routers.avi_back.rule=Host(`${DNS}}`) && PathPrefix(`/api`)
-      - traefik.http.routers.avi_back.entrypoints=websecure
-      - traefik.http.routers.avi_back.tls.certresolver=letsencrypt
-      - traefik.http.services.avi_back.loadbalancer.server.port=3000
+      - "traefik.enable=true"
+      - "traefik.http.routers.avi_back.rule=Host(`${DNS}`) && PathPrefix(`/api`)"
+      - "traefik.http.routers.avi_back.entrypoints=websecure"
+      - "traefik.http.routers.avi_back.tls.certresolver=letsencrypt"
+      - "traefik.http.services.avi_back.loadbalancer.server.port=3000"
     networks:
       - share_network
     env_file:
