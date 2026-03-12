@@ -1,0 +1,16 @@
+.git/
+dist/
+node_modules/
+
+.editorconfig
+.env
+.gitignore
+
+database.sql
+ecosystem.config.js
+nginx.conf
+README.md
+Dockerfile
+docker-compose.yaml
+
+emails/*.mjml

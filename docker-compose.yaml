@@ -1,0 +1,19 @@
+services:
+  avi_back_app:
+    build: .
+    container_name: avi_back_app
+    restart: unless-stopped
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.avi_back.rule=Host(`${TRAEFIK_HOST`})
+      - traefik.http.routers.avi_back.entrypoints=websecure
+      - traefik.http.routers.avi_back.tls.certresolver=letsencrypt
+      - traefik.http.services.avi_back.loadbalancer.server.port=3000
+    networks:
+      - share_network
+    env_file:
+      - .env
+
+networks:
+  share_network:
+    external: true
