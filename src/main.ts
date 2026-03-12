@@ -6,6 +6,7 @@ import { COOKIE_SECRET, ORIGINS } from '@core/constants';
 import { AppModule } from '@app/app.module';
 import { NestFactory } from '@nestjs/core';
 import cookieParser from "cookie-parser";
+import compression from "compression";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
@@ -28,6 +29,7 @@ async function bootstrap() {
   app.useBodyParser("json", { limit: "50mb" });
 
   app.use(cookieParser(COOKIE_SECRET));
+  app.use(compression());
 
   app.enableCors({
     origin: ORIGINS,
